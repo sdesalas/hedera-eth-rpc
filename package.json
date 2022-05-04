@@ -1,0 +1,34 @@
+{
+  "name": "hedera-eth-rpc",
+  "version": "1.0.0",
+  "description": "An Ethereum JSON-RPC API bridge to Hedera blockchain network.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdesalas/hedera-eth-rpc.git"
+  },
+  "keywords": [
+    "hedera",
+    "ethereum",
+    "json",
+    "rpc",
+    "api",
+    "bridge"
+  ],
+  "author": "Steven de Salas",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sdesalas/hedera-eth-rpc/issues"
+  },
+  "homepage": "https://github.com/sdesalas/hedera-eth-rpc#readme",
+  "dependencies": {
+    "@hashgraph/hethers": "^1.1.0",
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15"
+  }
+}
