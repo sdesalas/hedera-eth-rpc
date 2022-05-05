@@ -1,0 +1,17 @@
+#!/usr/bin/env ts-node
+
+const app = require('../app');
+const config = require('../config').default;
+const http = require('http');
+
+app.set('port', config.HEDERA_ETHRPC_PORT);
+
+const server = http.createServer(app);
+server.listen(config.HEDERA_ETHRPC_PORT);
+server.on('listening', () => {
+  const addr = server.address();
+  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+  console.log('Listening on ' + bind);
+});
+
+module.exports = server;

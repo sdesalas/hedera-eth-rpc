@@ -1,6 +1,6 @@
-const provider = require('../lib/provider');
+import provider from '../lib/provider';
 
-module.exports = async (account, block) => {
+export default async (account, block) => {
   try {
     return '0x' + Number(await provider.getBalance(account)).toString(16);
   } catch (err) {}

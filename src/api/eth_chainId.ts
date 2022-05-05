@@ -1,5 +1,5 @@
-const provider = require('../lib/provider');
+import provider from '../lib/provider';
 
-module.exports = async () => {
+export default async () => {
   return '0x' + Number((await provider.getNetwork()).chainId).toString(16);
 };

@@ -1,11 +1,23 @@
-const api = require('./api');
+import path from 'path';
+import fs from 'fs';
+
 const hide_methods = ['net_version'];
 
-module.exports = async (req, res, next) => {
+// Initialize ETH JSON-RPC APIs
+const api = {};
+for (const item of fs.readdirSync(path.join(__dirname, 'api'), {withFileTypes: true})) {
+  if (item.isFile() && item.name.split('.').pop() === 'ts') {
+    const method = item.name.split('.').shift();
+    console.log('Adding api/%s...', method);
+    api[method] = require('./api/' + item.name).default;
+  }
+}
+
+export default async (req, res, next) => {
   console.log('%s %s', req.method, req.originalUrl);
   const {jsonrpc, id, method, params} = req?.body || {};
   // Invalid request
-  if (!req.method === 'POST' || !id || !method || jsonrpc !== '2.0') {
+  if (req.method !== 'POST' || !id || !method || jsonrpc !== '2.0') {
     res.writeHead(400);
     res.status(400).send({jsonrpc, error: {code: -32600, message: 'Invalid Request'}, id});
     return;
