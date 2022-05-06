@@ -48,6 +48,7 @@ export default class Crawler {
         console.log('bulkWrite() modified #', docs.nModified);
       } catch (e) {
         console.error(e);
+        throw e;
       }
     }
     // Pick next url or start over
