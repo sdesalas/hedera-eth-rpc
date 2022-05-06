@@ -1,5 +1,14 @@
 #!/usr/bin/env ts-node
 
 const Crawler = require('../src/lib/crawler').default;
+const config = require('../config').default;
+
+// Allow setting network via CLI argument
+// @example npm run crawler mainnet
+if (["mainnet", "testnet"].includes(process.argv[2])) {
+  config.HEDERA_ETHRPC_NETWORK = process.argv[2];
+  console.log("HEDERA_ETHRPC_NETWORK=%s", config.HEDERA_ETHRPC_NETWORK);
+}
 
 Crawler.start();
+

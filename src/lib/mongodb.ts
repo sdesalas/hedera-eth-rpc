@@ -1,16 +1,15 @@
-const MongoClient = require('mongodb').MongoClient;
-const ObjectId = require('mongodb').ObjectId;
-const utils = require('./utils');
-const config = require('../config');
+import {MongoClient} from 'mongodb';
+import config from '../../config';
 
-class MongoDb {
+export default class MongoDb {
   static connection;
 
   static async connect() {
     if (MongoDb.connection) {
       return MongoDb.connection;
     }
-    return MongoDb.connection = await MongoClient.connect(`mongodb://${config.MONGODB_USER}:${config.MONGODB_PASS}@${config.MONGODB_HOST}/${config.MONGODB_DB}`);
+    const url = `mongodb://${config.MONGODB_USER}:${config.MONGODB_PASS}@${config.MONGODB_HOST}/${config.MONGODB_DB}?authSource=admin`;
+    return MongoDb.connection = await MongoClient.connect(url);
   }
 
   static async disconnect() {
