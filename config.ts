@@ -1,8 +1,8 @@
 import 'dotenv/config'
 import {obfuscate} from './src/lib/utils';
 
-const HEDERA_ETHRPC_PORT = process.env.HEDERA_ETHRPC_PORT || 58545;
 const HEDERA_ETHRPC_NETWORK = process.env.HEDERA_ETHRPC_NETWORK || 'mainnet';
+const HEDERA_ETHRPC_PORT = process.env.HEDERA_ETHRPC_PORT || ((HEDERA_ETHRPC_NETWORK === 'testnet') ? 38545 : 58545);
 const HEDERA_ETHRPC_HEARTBEAT_MS = Number(process.env.HEDERA_ETHRPC_HEARTBEAT_MS) || 5000;
 const MONGODB_HOST = process.env.MONGODB_HOST || 'localhost';
 const MONGODB_USER = process.env.MONGODB_USER || 'admin';

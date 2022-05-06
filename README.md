@@ -14,8 +14,18 @@ Its really not that hard is it?
 
 ## Add to MetaMask
 
+#### Mainnet
+
 - Network Name: Hedera Mainnet
-- RCP URL: http://localhost:18545
+- RCP URL: http://localhost:58545
 - Chain Id: 290
 - Currency Symbol: Hbar
 - Explorer Url: https://app.dragonglass.me/hedera/
+
+#### Testnet
+
+- Network Name: Hedera Testnet
+- RCP URL: http://localhost:38545
+- Chain Id: 291
+- Currency Symbol: Hbar
+- Explorer Url: https://testnet.dragonglass.me/hedera/
