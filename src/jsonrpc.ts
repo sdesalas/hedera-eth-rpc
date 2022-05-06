@@ -5,15 +5,17 @@ const hide_methods = ['net_version'];
 
 // Initialize ETH JSON-RPC APIs
 const api = {};
-for (const item of fs.readdirSync(path.join(__dirname, 'api'), {withFileTypes: true})) {
-  if (item.isFile() && item.name.split('.').pop() === 'ts') {
-    const method = item.name.split('.').shift();
-    console.log('Adding api/%s...', method);
-    api[method] = require('./api/' + item.name).default;
+setTimeout(() => {
+  for (const item of fs.readdirSync(path.join(__dirname, 'api'), {withFileTypes: true})) {
+    if (item.isFile() && item.name.split('.').pop() === 'ts') {
+      const method = item.name.split('.').shift();
+      console.log('Adding api/%s...', method);
+      api[method] = require('./api/' + item.name).default;
+    }
   }
-}
+}, 0);
 
-export default async (req, res, next) => {
+export default async (req, res) => {
   console.log('%s %s', req.method, req.originalUrl);
   const {jsonrpc, id, method, params} = req?.body || {};
   // Invalid request

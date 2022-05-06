@@ -1,4 +1,5 @@
 #!/usr/bin/env ts-node
 
-const crawler = require('../lib/crawler');
+const Crawler = require('../src/lib/crawler').default;
 
+Crawler.start();

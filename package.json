@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "nodemon --ext ts,js --exec ./node_modules/.bin/ts-node ./bin/www",
     "start": "ts-node ./bin/www",
+    "crawler": "ts-node ./bin/crawler",
     "ts": "ts-node"
   },
   "repository": {
@@ -31,7 +32,9 @@
     "@hashgraph/hethers": "^1.1.0",
     "@hashgraph/sdk": "^2.11.3",
     "axios": "^0.27.2",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "mongodb": "^4.5.0",
     "nodemon": "^2.0.15",
     "ts-node": "^10.7.0"
   }
