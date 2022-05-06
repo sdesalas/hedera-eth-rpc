@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/bash
 #
 # Helps redeploy services when there are git remote changes
 
@@ -13,7 +13,7 @@ if [ $LOCAL = $REMOTE ]; then
 elif [ $LOCAL = $BASE ]; then
     echo "$(date +%FT%T) Need to pull"
     git pull
-#    docker-compose -f ./api/docker-compose.yml up --build -d
+    docker-compose -f ${BASH_SOURCE%/*}/api/docker-compose.yml up --build -d
 elif [ $REMOTE = $BASE ]; then
     echo "$(date +%FT%T) Need to push"
 else
