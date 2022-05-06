@@ -29,6 +29,8 @@
   "homepage": "https://github.com/sdesalas/hedera-eth-rpc#readme",
   "dependencies": {
     "@hashgraph/hethers": "^1.1.0",
+    "@hashgraph/sdk": "^2.11.3",
+    "axios": "^0.27.2",
     "express": "^4.17.3",
     "nodemon": "^2.0.15",
     "ts-node": "^10.7.0"

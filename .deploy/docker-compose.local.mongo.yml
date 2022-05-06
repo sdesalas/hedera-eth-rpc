@@ -1,0 +1,15 @@
+version: '2'
+    services:
+      mongodb:
+        image: mongo:5.0.8
+        volumes:
+          - ./data/mongodb/data/db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: pass
+    ports:
+      - '27017:27017'
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "\"printjson(db)\""]
+      retries: 3
+
