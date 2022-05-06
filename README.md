@@ -29,3 +29,4 @@ Its really not that hard is it?
 - Chain Id: 291
 - Currency Symbol: `Hbar`
 - Explorer Url: https://testnet.dragonglass.me/hedera/
+
