@@ -1,5 +1,6 @@
 #!/bin/sh 
 
+FETCH=$(git fetch)
 UPSTREAM=${1:-'origin/master'}
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse "$UPSTREAM")
