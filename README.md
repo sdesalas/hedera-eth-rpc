@@ -19,7 +19,7 @@ Its really not that hard is it?
 - Network Name: Hedera Mainnet
 - RCP URL: http://localhost:58545
 - Chain Id: 290
-- Currency Symbol: Hbar
+- Currency Symbol: `Hbar`
 - Explorer Url: https://app.dragonglass.me/hedera/
 
 #### Testnet
@@ -27,5 +27,5 @@ Its really not that hard is it?
 - Network Name: Hedera Testnet
 - RCP URL: http://localhost:38545
 - Chain Id: 291
-- Currency Symbol: Hbar
+- Currency Symbol: `Hbar`
 - Explorer Url: https://testnet.dragonglass.me/hedera/
