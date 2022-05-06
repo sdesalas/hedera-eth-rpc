@@ -8,7 +8,7 @@ export default class Crawler {
           'https://mainnet-public.mirrornode.hedera.com' : 
           'https://testnet.mirrornode.hedera.com';
 
-  static next;
+  static nextUrl;
 
   static startUrl = `${Crawler.HEDERA_MIRROR_API_ROOT}/api/v1/accounts?balance=false&limit=100&order=desc`;
 
@@ -19,7 +19,7 @@ export default class Crawler {
 
   static async heartbeat() {
     console.log(Date.now(), 'Crawler.heartbeat()');
-    const url = Crawler.next || Crawler.startUrl;
+    const url = Crawler.nextUrl || Crawler.startUrl;
     console.log(`GET ${url}`);
     const response = await axios.get(url);
     console.log(`${response.status} ${response.statusText}`);
@@ -53,6 +53,6 @@ export default class Crawler {
     }
     // Pick next url or start over
     const next = response.data?.links?.next;
-    Crawler.next = (next) ? `${Crawler.HEDERA_MIRROR_API_ROOT}${next}`: Crawler.startUrl;
+    Crawler.nextUrl = (next) ? `${Crawler.HEDERA_MIRROR_API_ROOT}${next}`: Crawler.startUrl;
   }
 }
