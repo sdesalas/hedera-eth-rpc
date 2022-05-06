@@ -2,7 +2,7 @@
 version: "2.4"
 services:
   api:
-    build: ./
+    build: ../../
     ports:
       - '58545:58545'
     healthcheck:
