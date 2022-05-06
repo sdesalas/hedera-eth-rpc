@@ -2,6 +2,7 @@
 #
 # Helps redeploy services when there are git remote changes
 #
+# @usage: sudo ./check.sh [branch] [--force]
 # @example: sudo ./check.sh origin/master --force
 
 FETCH=$(git fetch)
