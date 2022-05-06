@@ -13,6 +13,7 @@ BASE=$(git merge-base @ "$UPSTREAM")
 function rebuild() {
     git pull
     docker-compose -f ${BASH_SOURCE%/*}/api/docker-compose.yml up --build -d
+    docker-compose -f ${BASH_SOURCE%/*}/crawler/docker-compose.yml up --build -d
 }
 
 if [ "$2" = "--force" ]; then
