@@ -1,0 +1,11 @@
+---
+version: "2.1"
+services:
+  hedera-eth-rpc:
+    context: ./
+    ports:
+      - '58545:58545'
+    healthcheck:
+      test: ["CMD", "curl", "http://localhost:58545/healthcheck"]
+      retries: 3
+

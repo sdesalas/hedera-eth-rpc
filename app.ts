@@ -6,7 +6,9 @@ const app = express();
 
 app.use(express.json({limit: '10mb'}));
 
-app.use('/', jsonRPC);
+app.get('/healthcheck', (req, res) => res.status(200).send('OK'));
+
+app.post('/', jsonRPC);
 
 // Finish off
 module.exports = app;
