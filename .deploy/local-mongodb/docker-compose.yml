@@ -1,9 +1,10 @@
-version: '2'
-    services:
-      mongodb:
-        image: mongo:5.0.8
-        volumes:
-          - ./data/mongodb/data/db:/data/db
+---
+version: "2.1"
+services:
+  mongodb:
+    image: mongo:5.0.8
+    volumes:
+      - ./data/mongodb/data/db:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: pass
