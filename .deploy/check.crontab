@@ -1,0 +1,3 @@
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+*/1 * * * * cd $PROJECTS_DIR/hedera-eth-rpc/.deploy && ./check.sh >> check.$(date +%A).log 2>&1
