@@ -10,6 +10,8 @@ export default class Crawler {
 
   static next;
 
+  static startUrl = `${Crawler.HEDERA_MIRROR_API_ROOT}/api/v1/accounts?balance=false&limit=100&order=desc`;
+
   static start() {
     console.log(Date.now(), 'Crawler.start()')
     setInterval(Crawler.heartbeat, config.HEDERA_ETHRPC_HEARTBEAT_MS);
@@ -17,7 +19,7 @@ export default class Crawler {
 
   static async heartbeat() {
     console.log(Date.now(), 'Crawler.heartbeat()');
-    const url = Crawler.next || `${Crawler.HEDERA_MIRROR_API_ROOT}/api/v1/accounts?balance=false&limit=100&order=desc`;
+    const url = Crawler.next || Crawler.startUrl;
     console.log(`GET ${url}`);
     const response = await axios.get(url);
     console.log(`${response.status} ${response.statusText}`);
@@ -49,8 +51,8 @@ export default class Crawler {
         throw e;
       }
     }
-    if (response.data?.links?.next) {
-      Crawler.next = `${Crawler.HEDERA_MIRROR_API_ROOT}${response.data?.links?.next}`;
-    }
+    // Pick next url or start over
+    const next = response.data?.links?.next;
+    Crawler.next = (next) ? `${Crawler.HEDERA_MIRROR_API_ROOT}${next}`: Crawler.startUrl;
   }
 }
