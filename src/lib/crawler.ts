@@ -38,8 +38,8 @@ export default class Crawler {
           items.push(item);
         }
       }
-      const connection = await MongoDb.connect();
       try {
+        const connection = await MongoDb.connect();
         const c = await connection.db(config.MONGODB_DB).collection(config.HEDERA_ETHRPC_NETWORK);
         const ops = items.map(item => ({ updateOne: { filter: { _id: item._id }, update: [{ $set: item }], upsert: true}}));
         const docs = await c.bulkWrite(ops, {ordered: false});
@@ -48,7 +48,6 @@ export default class Crawler {
         console.log('bulkWrite() modified #', docs.nModified);
       } catch (e) {
         console.error(e);
-        throw e;
       }
     }
     // Pick next url or start over
