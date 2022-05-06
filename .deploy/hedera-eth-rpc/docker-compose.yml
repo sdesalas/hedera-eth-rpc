@@ -1,8 +1,8 @@
 ---
-version: "2.1"
+version: "2.4"
 services:
   hedera-eth-rpc:
-    context: ./
+    build: ./
     ports:
       - '58545:58545'
     healthcheck:
