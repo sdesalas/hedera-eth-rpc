@@ -1,4 +1,6 @@
 #!/bin/sh 
+#
+# Helps redeploy services when there are git remote changes
 
 FETCH=$(git fetch)
 UPSTREAM=${1:-'origin/master'}
