@@ -73,7 +73,7 @@ export default class MongoDb {
     }
   }
 
-  static async stats(collection) {
+  static async stats(collection:string) {
     const client = await MongoDb.connect();
     try {
       const c = await client.db(config.MONGODB_DB).collection(collection);

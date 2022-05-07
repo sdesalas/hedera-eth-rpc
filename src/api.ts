@@ -25,7 +25,7 @@ import MongoDb from "./lib/mongodb";
         }
         res.json(json);
       } else {
-        res.status(400).json({error: "Not Found"});
+        res.status(404).json({error: "Not Found"});
       }
     } catch (err) {
       console.error(err);
@@ -54,7 +54,7 @@ import MongoDb from "./lib/mongodb";
         const json = {address, publicKey, type, account};
         res.json(json);
       } else {
-        res.status(400).json({error: "Not Found"});
+        res.status(404).json({error: "Not Found"});
       }
     } catch (err) {
       console.error(err);
@@ -63,14 +63,20 @@ import MongoDb from "./lib/mongodb";
   };
 }
 
-export function count(network) {
-  const p = provider[network];
-  if (!p) throw Error('Provider not available: ' + network);
+export function count(network?:string) {
   return async (req, res) => {
     console.log('count(%s)', network)
     try {
-      const stats = await MongoDb.stats(network);
-      res.json({count: stats.count})
+      if (!network) {
+        const mainnet = await MongoDb.stats('mainnet');
+        const testnet = await MongoDb.stats('testnet');
+        res.json({mainnet: mainnet.count, testnet: testnet.count});
+      } else {
+        const p = provider[network];
+        if (!p) throw Error('Provider not available: ' + network);
+        const stats = await MongoDb.stats(network);
+        res.json({count: stats.count})
+      }
     } catch (err) {
       console.error(err);
       res.status(500).json({error: String(err)});

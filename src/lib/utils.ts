@@ -1,6 +1,10 @@
 import crypto from 'crypto';
 import {BinaryToTextEncoding} from 'crypto';
 import { keccak256 } from "@ethersproject/keccak256";
+import base32 from 'base32.js';
+
+const base32decoder = new base32.Decoder();
+const base32encoder = new base32.Encoder();
 
 export const SECOND = 1000;
 export const MINUTE = 60*SECOND;
@@ -29,4 +33,11 @@ export function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+export function base32decode(str) {
+  return base32decoder.write(str).finalize();
+}
+
+export function base32encode(bytes) {
+  return base32encoder.write(bytes).finalize();
+}
 
