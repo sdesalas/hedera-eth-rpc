@@ -5,10 +5,18 @@ const config = require('../config').default;
 
 // Allow setting network via CLI argument
 // @example npm run crawler mainnet
+let network;
 if (["mainnet", "testnet"].includes(process.argv[2])) {
-  config.HEDERA_ETHRPC_NETWORK = process.argv[2];
-  console.log("HEDERA_ETHRPC_NETWORK=%s", config.HEDERA_ETHRPC_NETWORK);
+  config.HEDERA_ETHRPC_NETWORK = network = process.argv[2];
+  console.log("HEDERA_ETHRPC_NETWORK=%s", network);
 }
 
-Crawler.start();
+if (network) {
+  new Crawler(network).start();
+} else {
+  // No network, run both
+  setTimeout(() => new Crawler('mainnet').start(), 0);
+  setTimeout(() => new Crawler('testnet').start(), Math.round(config.HEDERA_ETHRPC_HEARTBEAT_MS/2));
+}
+
 
