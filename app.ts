@@ -1,7 +1,7 @@
 import express from 'express';
 
 import jsonRPC from './src/jsonrpc';
-import {getAddress, cors} from './src/api';
+import {getAddress, getAccount, cors} from './src/api';
 
 const app = express();
 
@@ -17,6 +17,10 @@ app.get('/api/mainnet/address/:address', getAddress('mainnet'));
 app.options('/api/mainnet/address/:address', cors);
 app.get('/api/testnet/address/:address', getAddress('testnet'));
 app.options('/api/testnet/address/:address', cors);
+app.get('/api/mainnet/account/:account', getAccount('mainnet'));
+app.options('/api/mainnet/account/:account', cors);
+app.get('/api/testnet/account/:account', getAccount('testnet'));
+app.options('/api/testnet/account/:account', cors);
 
 // RPC
 app.post('/rpc/mainnet', jsonRPC('mainnet'));
