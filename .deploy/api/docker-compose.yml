@@ -3,8 +3,6 @@ version: "2.4"
 services:
   api:
     build: ../../
-    environment:
-      MONGODB_HOST: ${MONGODB_HOST:-localhost}
     ports:
       - '58545:58545'
     healthcheck:
