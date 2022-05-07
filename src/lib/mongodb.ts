@@ -19,7 +19,29 @@ export default class MongoDb {
     }
   }
 
-  static async put(collection, data) {
+  static async findOne(collection:string, filter, options?) {
+    const record = await MongoDb.find(collection, filter, options);
+    return record[0];
+  }
+
+  static async find(collection:string, filter, options?) {
+    const client = await MongoDb.connect();
+    options = options || {};
+    options.limit = isNaN(options.limit) ? 500 : options.limit;
+    let result = [];
+    try {
+      result = await client
+          .db(config.MONGODB_DB)
+          .collection(collection)
+          .find(filter, options)
+          .toArray();
+    } catch (e) {
+      console.error(e);
+    }
+    return result;
+  }
+
+  static async put(collection:string, data) {
     let items = [];
     if (Array.isArray(data)) items = data.slice();
     else if (typeof data === 'object') items = [data];
@@ -29,9 +51,9 @@ export default class MongoDb {
         const c = await connection.db(config.MONGODB_DB).collection(collection);
         const ops = items.map(item => ({ replaceOne: { filter: { _id: item._id }, replacement: item, upsert: true}}));
         const docs = await c.bulkWrite(ops, {ordered: false});
-        console.log('putMany() upserted-records', docs.nUpserted);
-        console.log('putMany() matched-records', docs.nMatched);
-        console.log('putMany() modified-records', docs.nModified);
+        console.log('bulkWrite() upserted', docs.nUpserted);
+        console.log('bulkWrite() matched', docs.nMatched);
+        console.log('bulkWrite() modified', docs.nModified);
       } catch (e) {
         console.error(e);
         throw e;
