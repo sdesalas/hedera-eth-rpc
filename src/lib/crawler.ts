@@ -20,7 +20,7 @@ export default class Crawler {
 
   network = 'mainnet';
   nextUrl;
-  startUrl = `/api/v1/accounts?balance=false&limit=100&order=desc&account.id=lt:0.0.514186`;
+  startUrl = `/api/v1/accounts?balance=false&limit=100&order=desc&account.id=lt:0.0.490986`;
 
   start() {
     console.log('%s Crawler.start()', Date.now());
