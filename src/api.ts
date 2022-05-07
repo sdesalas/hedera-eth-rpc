@@ -63,6 +63,21 @@ import MongoDb from "./lib/mongodb";
   };
 }
 
+export function count(network) {
+  const p = provider[network];
+  if (!p) throw Error('Provider not available: ' + network);
+  return async (req, res) => {
+    console.log('count(%s)', network)
+    try {
+      const stats = await MongoDb.stats(network);
+      res.json({count: stats.count})
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({error: String(err)});
+    }
+  }
+}
+
 /**
  * Allows CORS for certain entrypoint, to be used in
  * conjunction with OPTIONS requests.

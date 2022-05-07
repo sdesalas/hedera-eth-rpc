@@ -18,9 +18,10 @@ export default class Crawler {
     }
   }
 
+  errors = 0;
   network = 'mainnet';
   nextUrl;
-  startUrl = `/api/v1/accounts?balance=false&limit=100&order=desc&account.id=lt:0.0.490986`;
+  startUrl = `/api/v1/accounts?balance=false&limit=100&order=desc`;
 
   start() {
     console.log('%s Crawler.start()', Date.now());
@@ -64,7 +65,7 @@ export default class Crawler {
       this.nextUrl = (next) ? next: this.startUrl;
     } catch (e) {
       console.error(e);
-      throw e;
+      if (++this.errors > 1000) throw e;
     }
   }
 }

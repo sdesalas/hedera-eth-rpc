@@ -60,4 +60,27 @@ export default class MongoDb {
       }
     }
   }
+
+  static async aggregate(collection:string, pipeline) {
+    const client = await MongoDb.connect();
+    try {
+      const c = await client.db(config.MONGODB_DB).collection(collection);
+      const result = await c.aggregate(pipeline);
+      return result?.toArray();
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+
+  static async stats(collection) {
+    const client = await MongoDb.connect();
+    try {
+      const c = await client.db(config.MONGODB_DB).collection(collection);
+      return c.stats();
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
 }
