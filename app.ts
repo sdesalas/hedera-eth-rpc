@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import cache from 'cache-middleware-express';
 import jsonRPC from './src/jsonrpc';
 import {getAddress, getAccount, count} from './src/api';
 
@@ -13,13 +14,13 @@ app.use((req, res, next) => { res.removeHeader('x-content-type-options'); next()
 app.get('/healthcheck', (req, res) => res.status(200).send('OK'));
 
 // API
-app.get('/api/count', cors(), count());
-app.get('/api/mainnet/count', cors(), count('mainnet'));
-app.get('/api/testnet/count', cors(), count('testnet'));
-app.get('/api/mainnet/address/:address', cors(), getAddress('mainnet'));
-app.get('/api/testnet/address/:address', cors(), getAddress('testnet'));
-app.get('/api/mainnet/account/:account', cors(), getAccount('mainnet'));
-app.get('/api/testnet/account/:account', cors(), getAccount('testnet'));
+app.get('/api/count', cors(), cache(15), count());
+app.get('/api/mainnet/count', cors(), cache(15), count('mainnet'));
+app.get('/api/testnet/count', cors(), cache(15), count('testnet'));
+app.get('/api/mainnet/address/:address', cors(), cache(30), getAddress('mainnet'));
+app.get('/api/testnet/address/:address', cors(), cache(30), getAddress('testnet'));
+app.get('/api/mainnet/account/:account', cors(), cache(30), getAccount('mainnet'));
+app.get('/api/testnet/account/:account', cors(), cache(30), getAccount('testnet'));
 
 // RPC
 app.post('/rpc/mainnet', jsonRPC('mainnet'));
